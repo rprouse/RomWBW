@@ -1,0 +1,27 @@
+This library contains a file called FORLBR.COM which is a modified version
+of Irv Hoff's FOR.COM distributed with KMD23. It is used to search the
+DISK.DIR listing created by SD138. Patch the drive and user that DISK.DIR
+is located on at 103h and 104h. Current values are drive A and user 0.
+
+FORLBR.COM can search for multiple files by seperating the filenames with
+the | character. FORLBR can be used with the ? wildcard but not the * wildcard.
+FORLBR is intended to be used to search the DISK.DIR for files contained
+inside of .lbr,.arc, and .ark files. The /E option with the /L option is
+used to create a disk.dir containing only only these listings.
+
+A typical command line might be SD /ADEFNL.
+
+A summary listing of number of files in each user area and disk along with
+a grand total can be shown by using the command SD /ADEN.
+
+A master DISK.DIR can be created for a set of floppies by running SD138 with
+the /F option for each floppy. If a disk.dir is already present, each new
+run is appended to the old file. In this way, a master listing can be created
+containing all files with each .LBR, .ARC and .ARK file listed as well.
+
+Note that a search for FILE.TXT would fail when searching the DISK.DIR listing
+with FORLBR since the file would be listed as FILE    .TXT. For this reason,
+only use the first few characters of the filename when using FORLBR. 
+						Ken Reid
+						Houston N/W Znode#45
+
