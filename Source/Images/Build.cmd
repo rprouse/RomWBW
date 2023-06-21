@@ -72,3 +72,6 @@ copy hd1k_prefix.dat ..\..\Binary\ || exit /b
 echo.
 echo Building Combo Disk (1024 directory entry format) Image...
 copy /b hd1k_prefix.dat + ..\..\Binary\hd1k_cpm22.img + ..\..\Binary\hd1k_zsdos.img + ..\..\Binary\hd1k_nzcom.img + ..\..\Binary\hd1k_cpm3.img + ..\..\Binary\hd1k_zpm3.img + ..\..\Binary\hd1k_ws4.img ..\..\Binary\hd1k_combo.img || exit /b
+
+echo Building custom Combo Disk (1024 directory entry format) Image...
+copy /b hd1k_prefix.dat + ..\..\Binary\hd1k_cpm22.img + ..\..\Binary\hd1k_zsdos.img  + ..\..\Binary\hd1k_cpm3.img + ..\..\Binary\hd1k_games.img + ..\..\Binary\hd1k_z80asm.img + ..\..\Binary\hd1k_aztecc.img + ..\..\Binary\hd1k_hitechc.img + ..\..\Binary\hd1k_tpascal.img + ..\..\Binary\hd1k_bascomp.img + ..\..\Binary\hd1k_fortran.img + ..\..\Binary\hd1k_ws4.img + ..\..\Binary\hd1k_nzcom.img + ..\..\Binary\hd1k_zpm3.img ..\..\Binary\hd1k_rc2014_combo.img || exit /b
