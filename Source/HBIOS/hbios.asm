@@ -9160,6 +9160,10 @@ HB_MODSTART	.EQU	$
   #INCLUDE "lcd.asm"
 #ENDIF
 ;
+#IF (LCDI2CENABLE)
+  #INCLUDE "lcdi2c.asm"
+#ENDIF
+;
 #IF (H8PENABLE)
   #INCLUDE "h8p.asm"
 #ENDIF
