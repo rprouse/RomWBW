@@ -350,6 +350,8 @@ please let me know if I missed you!
 * Jay Cotton provided the SCSI transport code upon which the SCSI
   driver is based.
 
+* Willy De la Court added an I2C variant of the LCD driver.
+
 `\clearpage`{=latex}
 
 ## Related Projects

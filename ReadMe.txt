@@ -1,6 +1,6 @@
 RomWBW Introduction
 Wayne Warthen (wwarthen@gmail.com)
-11 Jul 2026
+16 Jul 2026
 
 
 
@@ -372,6 +372,8 @@ let me know if I missed you!
 
 - Jay Cotton provided the SCSI transport code upon which the SCSI driver
   is based.
+
+- Willy De la Court added an I2C variant of the LCD driver.
 
 
 Related Projects
