@@ -487,6 +487,8 @@ PCF_PRTERR:
 	CALL	PRTSTR
 ;	CALL	NEWLINE
 	POP	HL
+	; FORCE NZ THIS IS THE ERROR PATH
+	OR	$FF
 	RET
 ;
 ;-----------------------------------------------------------------------------
