@@ -151,6 +151,25 @@ PCF_PUTBYTE:
 	RET
 ;
 ;-----------------------------------------------------------------------------
+; GET ONE BYTE OFF THE I2C BUS
+; CALLER MUST HAVE ALREADY WAITED FOR PIN
+; RETURNS BYTE IN A
+;
+PCF_GETBYTE:
+	IN	A,(PCF_RS0)
+	RET
+;
+;-----------------------------------------------------------------------------
+; PREP NEGATIVE ACKNOWLEDGE FOR THE NEXT BYTE READ
+; MASTER RECEIVER MODE, LAST BYTE OF A READ
+; SEE PCF8584 DATASHEET FIG.7
+;
+PCF_PREPNACK:
+	LD	A,PCF_ES0
+	OUT	(PCF_RS1),A
+	RET
+;
+;-----------------------------------------------------------------------------
 ;
 PCF_INITDEV:
 	LD	A,PCF_PIN   	; S1=80H: S0 SELECTED, SERIAL
