@@ -122,6 +122,9 @@ PCF_INIT:
 ;	GET_PCF		= IN A,(PCF_RS1)
 ;
 ;-----------------------------------------------------------------------------
+;
+PCF_START_ADDR:
+	OUT	(PCF_RS0),A
 PCF_START:
 	LD	A,PCF_START_
 	OUT	(PCF_RS1),A
@@ -137,6 +140,33 @@ PCF_REPSTART:
 PCF_STOP:
 	LD   	A,PCF_STOP_
 	OUT  	(PCF_RS1),A
+	RET
+;
+;-----------------------------------------------------------------------------
+; PUT ONE BYTE ON THE I2C BUS
+; A = BYTE. DOES NOT WAIT/CHECK ACK OR PIN
+;
+PCF_PUTBYTE:
+	OUT	(PCF_RS0),A
+	RET
+;
+;-----------------------------------------------------------------------------
+; GET ONE BYTE OFF THE I2C BUS
+; CALLER MUST HAVE ALREADY WAITED FOR PIN
+; RETURNS BYTE IN A
+;
+PCF_GETBYTE:
+	IN	A,(PCF_RS0)
+	RET
+;
+;-----------------------------------------------------------------------------
+; PREP NEGATIVE ACKNOWLEDGE FOR THE NEXT BYTE READ
+; MASTER RECEIVER MODE, LAST BYTE OF A READ
+; SEE PCF8584 DATASHEET FIG.7
+;
+PCF_PREPNACK:
+	LD	A,PCF_ES0
+	OUT	(PCF_RS1),A
 	RET
 ;
 ;-----------------------------------------------------------------------------
@@ -220,6 +250,13 @@ PCF_LABLP:
 	RET
 ;
 ;-----------------------------------------------------------------------------
+; PUT ONE BYTE ON THE I2C BUS
+; A = BYTE. DOES WAIT/CHECK PIN
+;
+PCF_PUTBYTE_PIN:
+	OUT	(PCF_RS0),A
+;
+;-----------------------------------------------------------------------------
 ;
 ; RETURN A=00/Z  IF SUCCESSFULL
 ; RETURN A=FF/NZ IF TIMEOUT
@@ -259,6 +296,14 @@ PCF_WFP2:
 	RET
 ;
 PCF_STATUS	.DB	00H
+
+;
+;-----------------------------------------------------------------------------
+; PUT ONE BYTE ON THE I2C BUS
+; A = BYTE. DOES WAIT/CHECK ACK
+;
+PCF_PUTBYTE_ACK:
+	OUT	(PCF_RS0),A
 
 ;--------------------------------------------------------------------------------
 ;
@@ -535,7 +580,7 @@ PCF_BBFAIL	.DB	"BUS BUSY$"
 ;
 END_PCF	.EQU	$
 SIZ_PCF	.EQU	END_PCF - ORG_PCF
-;	
+;
 	MEMECHO	"PCF occupies "
 	MEMECHO	SIZ_PCF
 	MEMECHO	" bytes.\n"
