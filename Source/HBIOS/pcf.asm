@@ -223,6 +223,13 @@ PCF_LABLP:
 	RET
 ;
 ;-----------------------------------------------------------------------------
+; PUT ONE BYTE ON THE I2C BUS
+; A = BYTE. DOES WAIT/CHECK PIN
+;
+PCF_PUTBYTE_PIN:
+	OUT	(PCF_RS0),A
+;
+;-----------------------------------------------------------------------------
 ;
 ; RETURN A=00/Z  IF SUCCESSFULL
 ; RETURN A=FF/NZ IF TIMEOUT
