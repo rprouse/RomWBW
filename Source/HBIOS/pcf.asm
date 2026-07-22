@@ -143,6 +143,14 @@ PCF_STOP:
 	RET
 ;
 ;-----------------------------------------------------------------------------
+; PUT ONE BYTE ON THE I2C BUS
+; A = BYTE. DOES NOT WAIT/CHECK ACK OR PIN
+;
+PCF_PUTBYTE:
+	OUT	(PCF_RS0),A
+	RET
+;
+;-----------------------------------------------------------------------------
 ;
 PCF_INITDEV:
 	LD	A,PCF_PIN   	; S1=80H: S0 SELECTED, SERIAL
@@ -553,7 +561,7 @@ PCF_BBFAIL	.DB	"BUS BUSY$"
 ;
 END_PCF	.EQU	$
 SIZ_PCF	.EQU	END_PCF - ORG_PCF
-;	
+;
 	MEMECHO	"PCF occupies "
 	MEMECHO	SIZ_PCF
 	MEMECHO	" bytes.\n"
