@@ -122,6 +122,9 @@ PCF_INIT:
 ;	GET_PCF		= IN A,(PCF_RS1)
 ;
 ;-----------------------------------------------------------------------------
+;
+PCF_START_ADDR:
+	OUT	(PCF_RS0),A
 PCF_START:
 	LD	A,PCF_START_
 	OUT	(PCF_RS1),A
@@ -259,6 +262,14 @@ PCF_WFP2:
 	RET
 ;
 PCF_STATUS	.DB	00H
+
+;
+;-----------------------------------------------------------------------------
+; PUT ONE BYTE ON THE I2C BUS
+; A = BYTE. DOES WAIT/CHECK ACK
+;
+PCF_PUTBYTE_ACK:
+	OUT	(PCF_RS0),A
 
 ;--------------------------------------------------------------------------------
 ;
