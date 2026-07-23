@@ -289,19 +289,14 @@ static int gen_z80(int *eb, char p, const int *vs, int i, int savepc)
 	switch (p) {
 	case 'f': b |= (vs[i] << 4); break;
 	case 'g': b |= (vs[i] << 6); break;
-	case 'i': if (s_pass > 0 && vs[i] > savepc && (vs[i] - savepc - 2) > 127) {
-			  eprint(_("relative jump out of bounds from (%d) to (%d)\n"),
-				savepc, vs[i]);
+	case 'i': b = (vs[i] - savepc - 2);
+		  if (s_pass > 0 && (b < -128 || b > 127)) {
+			  eprint(_("range of relative branch exceeded (%d)\n"),
+				b);
 			  eprcol(s_pline, s_pline_ep);
 			  newerr();
-		} else if (s_pass > 0 && vs[i] < savepc && (vs[i] - savepc - 2) < -128) {
-			  eprint(_("relative jump out of bounds from (%d) to (%d)\n"),
-				savepc, vs[i]);
-			  eprcol(s_pline, s_pline_ep);
-			  newerr();
-		}
-		b = (vs[i] - savepc - 2);
-		break;
+		  }
+		  break;
 	case 'j': if (s_pass > 0 && (vs[i] & ~56) != 0) {
 			  eprint(_("invalid RST argument (%d)\n"),
 				vs[i]);
